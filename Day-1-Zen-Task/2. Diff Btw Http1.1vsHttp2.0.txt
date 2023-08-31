@@ -1,0 +1,45 @@
+2. DIFFERENCES BETWEEN HTTP 1.1 AND HTTP 2.0
+
+HTTP - A protocol that clients (such as web browsers) use to request resources from servers (such as web servers).
+
+HTTPS - A method of encrypting HTTP. HTTP messages are encrypted using SSL/TLS. Web browsers are starting to warn more and more when websites are served over unencrypted HTTP as the web is moving towards HTTPS. On any website we create, using HTTPS is safe, unless we have some very good reason not to.
+
+Differences between HTTP 1.1 and HTTP 2.0:
+
+HTTP 1.1 - The most prevalent version of HTTP used to be HTTP/1.1. Since it is a plain-text protocol, there are some inefficiencies - especially when lots of resources are requested, such as a web page. HTTP/1.1 messages can be either unencrypted (web site addresses start with http://) or encrypted (web site addresses start with https://). Based on the start of the URL, clients decide which protocol to use, defaulting to http:// in most cases.
+
+HTTP 2.0 - In 2015, it was released as an alternative to the older text-based protocol HTTP in favour of a binary protocol represented by a predefined number of bytes. As a result, data can be parsed more easily by clients and servers, leaving fewer room for errors and allowing for multiplexing. The HTTP/2 protocol is also available over unencrypted (http://) and encrypted (https://) channels, but web browsers only support HTTPS, since the decision to use HTTP/1.1 or HTTP/2 is made as part of the HTTPS negotiation at the beginning of the connection.
+
+Approximately one third of all websites currently use HTTP/2 (up to half of all websites as of Jan 2020, and 67% of all website requests). In any case, not every client supports HTTP/2, so one should support HTTP/1.1 over HTTPS and HTTP/2 over HTTPS when possible (it is possible that node does this automatically when using the http module). It's not believed that HTTP/1.1 will be retired any time soon. One should also consider supporting HTTP/1.1 over unencrypted HTTP and then redirect to HTTPS version (which will then use HTTP/1.1 or HTTP/2 as appropriate). A web server like Apache or Nginx in front of Node makes this easy.
+
+Some of the Main Differences of HTTP/1.1 and HTTP/2:
+
+Background:
+Http 1.1 - It was actually developed as a common language that establishes connection and interaction between client and server machines.
+* Client has to send a request to the server by using the GET/POST method.
+* Client will respond to the request with an acknowledgement of request and demanded resource. 
+It is a live process until the client receives all the resources to load an entire webpage.
+Http 2.0 - It was modelled after SPDY protocol and has features like multiplexing, compression and minimised page load latency.
+The major feature that differentiates HTTP/2 from HTTP/1.1 is the binary framing layer. Unlike HTTP/1.1, HTTP/2 uses a binary framing layer. This layer encapsulates messages – converted to its binary equivalent – while making sure that its HTTP semantics (method details, header information, etc.) remain untamed. This feature of HTTP/2 enables gRPC to use lesser resources.
+
+Multiplexing:
+HTTP/1.1 loads resources one after the another, so if one resource cannot be loaded, it blocks all the other resources behind it. In general, HTTP/2 is can use a single TCP connection to send multiple streams of data at once so that no one resource blocks any other resource. HTTP/2 does this by splitting data into binary-code messages and numbering these messages so that the client knows which stream each binary message belongs to.
+
+Delivery Models:
+Http 1.1 has a long response time whereas Http 2.0 has reduced response time.
+Http 2 uses Server PUSH in order to send additional cacheable information to the client that isn’t requested but is anticipated in future requests.
+
+Buffer Overflow:
+The flow control mechanism in HTTP/1.1 relies on the basic TCP connection. Since HTTP/1.1 uses a TCP connection, each connection demands an individual flow control mechanism.
+It multiplexes data streams utilising the same (one) TCP connection. In this case, both machines can implement their flow controls instead of using the transport layer.
+
+Compression:
+HTTP/1.x uses formats like gzip to compress the data transferred in the messages.
+HTTP/2 uses a more advanced compression file format called HPACK that eliminates redundant information in HTTP header packets. This eliminates a few bytes from every HTTP packet. Given the volume of HTTP packets involved in loading even a single webpage, those bytes add up quickly, resulting in faster loading.
+
+Differences Summarised:
+
+HTTP2 is binary, instead of textual.
+HTTP2 is fully multiplexed, instead of ordered and blocking.
+HTTP2 uses header compression to reduce overhead.
+HTTP2 allows servers to “push” responses proactively into client caches.

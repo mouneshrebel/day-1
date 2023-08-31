@@ -1,0 +1,80 @@
+3. OBJECTS AND ITS INTERNAL REPRESENTATION IN JAVASCRIPT
+
+Object:
+
+In JavaScript, an object is a standalone/single entity, with properties and type. For example, let's compare it with a cup. A cup is an object, with properties. A cup has a colour, a design, weight, a material it is made of, etc. The same way, JavaScript objects can have properties, which define their characteristics.
+
+Booleans can be objects (if defined with the new keyword).
+Numbers can be objects (if defined with the new keyword).
+Strings can be objects (if defined with the new keyword).
+Dates are always objects.
+Maths are always objects.
+Regular expressions are always objects.
+Arrays are always objects.
+Functions are always objects.
+Objects are always objects.
+All JavaScript values, except primitives, are objects.
+
+Objects are variables too. But objects can contain many values.
+Object values are written as name : value pairs (name and value separated by a colon).
+
+e.g.
+let person = {firstName:"mounesh", lastName:"chakri", age:23, eyeColor:"brown"};
+
+A JavaScript object is a collection of named values.
+The named values, in JavaScript objects, are called properties.
+
+Creating Objects in JavaScript:
+
+By object literal
+By creating instance of Object directly (using new keyword)
+
+Using an Object Literal:
+By both defining and creating an object in one statement. An object literal is a list of name:value pairs (like age:23) inside curly braces {}.
+
+e.g.
+const person = {firstName:"mounesh", lastName:"chakri", age:23, eyeColor:"brown"};
+
+Spaces and line breaks are not important. An object definition can span multiple lines:
+
+e.g.
+const person = {
+firstName:"mounesh",
+ lastName:"chakri", 
+age:23, 
+eyeColor:"brown"
+};
+Or
+const person = {};
+person.firstName:"mounesh";
+person.lastName:"chakri";
+person.age:23;
+person.eyeColor:"brown";
+
+Using the js keyword new:
+creating a new JavaScript object using new Object().
+e.g.
+const person = new Object{};
+person.firstName:"mounesh";
+person.lastName:"chakri";
+person.age:23;
+person.eyeColor:"brown";
+
+JS Objects are Mutable:
+Objects are mutable: They are addressed by reference, not by value.
+If person is an object, the following statement will not create a copy of person:
+e.g.
+const x=person; //will not create copy of person
+
+The object x is not a copy of person. It is person. Both x and person are the same object.
+Any changes to x will also change person, because x and person are the same object.
+
+e.g.
+const person = {
+  firstName:"mounesh",
+  lastName:"chakri",
+  age:23,
+  eyeColor:"brown"
+}
+const x = person;
+x.age = 10;      // Will change both x.age and person.age
